@@ -1,0 +1,41 @@
+services:
+  llama-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.llama
+    ports:
+      - "0.0.0.0:8080:8080"
+    volumes:
+      - ./models:/models:ro
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: '2'
+    environment:
+      - MALLOC_ARENA_MAX=4
+    restart: "no"
+    networks:
+      - llama-network
+
+  chat-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+    ports:
+      - "0.0.0.0:3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://207.244.228.175:8080
+      - REACT_APP_TITLE=Llama Chat Interface
+      - REACT_APP_MAX_TOKENS=400
+    env_file:
+      - ./ui/.env
+    depends_on:
+      - llama-backend
+    restart: unless-stopped
+    networks:
+      - llama-network
+
+networks:
+  llama-network:
+    driver: bridge

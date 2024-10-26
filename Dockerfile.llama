@@ -1,0 +1,41 @@
+FROM almalinux:9
+
+# Install system dependencies
+RUN dnf update -y && \
+    dnf groupinstall -y "Development Tools" && \
+    dnf install -y \
+        cmake \
+        git \
+        curl-devel \
+        openssl-devel \
+        wget \
+        python3-pip && \
+    dnf clean all
+
+# Clone and build llama.cpp
+WORKDIR /app
+RUN git clone https://github.com/ggerganov/llama.cpp && \
+    cd llama.cpp && \
+    LLAMA_CURL=1 make
+
+# Create models directory
+RUN mkdir -p /models
+
+# Create start script - fixed version
+RUN echo '#!/bin/bash' > /app/llama.cpp/start.sh && \
+    echo 'if [ ! -f /models/llama-3.2-1b-instruct-q8_0.gguf ]; then' >> /app/llama.cpp/start.sh && \
+    echo '    echo "Error: Model file not found in /models directory"' >> /app/llama.cpp/start.sh && \
+    echo '    exit 1' >> /app/llama.cpp/start.sh && \
+    echo 'fi' >> /app/llama.cpp/start.sh && \
+    echo 'cd /app/llama.cpp' >> /app/llama.cpp/start.sh && \
+    echo './llama-server -m /models/llama-3.2-1b-instruct-q8_0.gguf --host 0.0.0.0 --port 8080 -c 512 -t 2' >> /app/llama.cpp/start.sh && \
+    chmod +x /app/llama.cpp/start.sh
+
+# Expose the server port
+EXPOSE 8080
+
+# Set the working directory
+WORKDIR /app/llama.cpp
+
+# Start the server using the script
+CMD ["/bin/bash", "/app/llama.cpp/start.sh"]
