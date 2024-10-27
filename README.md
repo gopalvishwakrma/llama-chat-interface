@@ -1,7 +1,3 @@
-Here’s a comprehensive README file for your project, showcasing the Llama Chat Interface. 
-
----
-
 # Llama Chat Interface
 
 ![Llama Chat Interface](assets/screenshot.png)
