@@ -11,7 +11,6 @@ A full-stack chat interface application using a custom Llama-based backend for l
 - [Configuration](#configuration)
 - [Screenshots](#screenshots)
 - [Troubleshooting](#troubleshooting)
-- [License](#license)
 
 ## Features
 - **Backend with Llama**: Uses Llama-based backend to handle language generation tasks.
