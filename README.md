@@ -1,7 +1,5 @@
 # Llama Chat Interface
 
-![Llama Chat Interface](assets/screenshot.png)
-
 A full-stack chat interface application using a custom Llama-based backend for language generation and a React-based front end for an interactive chat experience. The backend is containerized using Docker and managed by Docker Compose, making it easy to set up and deploy. The backend runs on an Almalinux-based environment, and the frontend is built with Node.js and React.
 
 ## Table of Contents
@@ -87,10 +85,10 @@ Ensure that the `REACT_APP_API_URL` points to the backend service.
 Here’s how the application looks at various stages.
 
 ### Chat Interface
-![Chat Interface](assets/screenshot.png)
+![Chat Interface](assets/Interface-screenshot.png)
 
 ### Backend Log Example
-![Backend Logs](assets/screenshot.png)
+![Backend Logs](assets/Backend-screenshot.png)
 
 ## Troubleshooting
 
