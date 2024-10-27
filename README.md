@@ -103,9 +103,3 @@ Here’s how the application looks at various stages.
 - **Network Issues Between Containers**:
   - Confirm that the containers are on the same Docker network (`llama-network`).
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-Feel free to add any specific issues or changes based on your deployment environment!
