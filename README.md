@@ -29,7 +29,7 @@ Ensure you have the following installed on your machine:
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/gopalvishwakrma/llama-chat-interface.git
-   cd llama-project
+   cd llama-chat-interface
    ```
 
 2. **Place the Model File**:
